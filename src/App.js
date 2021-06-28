@@ -9,7 +9,7 @@ class App extends Component {
 
     this.state = {
      monsters:  [],
-     searchField: ' '
+     searchField: ''
     };
   }
   componentDidMount() {
@@ -19,9 +19,11 @@ class App extends Component {
   }
   render() {
     const { monsters, searchField } = this.state;
-    const filteredMonsters = monsters.filter(monster => 
-      monster.name.toLowerCase().includes(searchField.toLowerCase())
-      )
+    console.log('searchField', searchField, 'searchField')
+    const filteredMonsters =  monsters.filter(monster => 
+     ( searchField ? monster.email.toLowerCase().includes(searchField.toLowerCase()) : true) ||
+     ( searchField ? monster.name.toLowerCase().includes(searchField.toLowerCase()) : true)
+  ) 
     return (
      <div className="App">
      <h1>Monsters Rodolex</h1>
@@ -31,6 +33,7 @@ class App extends Component {
        />
       <CardList monsters = {filteredMonsters} />
      </div>
+    
     );
   }
 }
